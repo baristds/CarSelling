@@ -4,34 +4,30 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Seller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
-    private int sellerId;
 
-    @Getter
-    @Setter
-    private  String location;
 
-    @Getter
-    @Setter
-    @OneToMany
-    private List<Car> cars;
+     private  String location;
 
-    @Getter
-    @Setter
-    @ManyToMany
-    private List<Customer> customers;
+
+     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+     private List<Car> cars =new ArrayList<>();
+
+
+
+     @ManyToMany
+     private List<Customer> customers = new ArrayList<>();
 
 }

@@ -1,41 +1,39 @@
 package com.example.carselling.models;
 
 import jakarta.persistence.*;
+
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Customer {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter
-    @Setter
     private int id;
 
-    @Getter
-    @Setter
+
     private int s_securityNumber;
 
-    @Getter
-    @Setter
+
     private String name;
 
-    @Getter
-    @Setter
+
     private String phoneNumber;
 
-    @Getter
-    @Setter
+
     private String adress;
 
-    @Getter
-    @Setter
-    @ManyToMany
-   private List<Seller> sellers;
+
+    @ManyToMany(mappedBy = "customers",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Seller> sellers =new ArrayList<>();
+
 
 }
